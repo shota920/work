@@ -25,7 +25,7 @@ y_bottom=700
 Threshold = 100
 
 
-desktop_path = os.getenv("HOMEDRIVE") + os.getenv("HOMEPATH") + "\\Desktop"
+desktop_path = os.path.expanduser("~\Desktop")
 
 save_root = desktop_path + '\\zzzm'
 save_src = save_root + '\\src'
@@ -79,7 +79,7 @@ def auto_screenshot():
     while(True):
         s = pyautogui.screenshot()
         s.save(save_src + '\\filename_{0:04d}.png'.format(count))
-        time.sleep(3)
+        time.sleep(1)
         
         if count == 0:
             shutil.copyfile(save_src + '\\filename_{0:04d}.png'.format(count),save_image + '\\filename_{0:04d}.png'.format(count))
@@ -89,9 +89,9 @@ def auto_screenshot():
      
         
         img_src1=cv2.imread(save_src + "\\filename_{0:04d}.png".format(count))
-        time.sleep(3)
+        time.sleep(1)
         img_src2=cv2.imread(save_src + "\\filename_{0:04d}.png".format(count-1))
-        time.sleep(3)
+        time.sleep(1)
        
         
         img_diff = cv2.absdiff(img_src2, img_src1)
@@ -108,7 +108,6 @@ def auto_screenshot():
         os.remove(save_src + "\\filename_{0:04d}.png".format(count-2))
         
         count += 1
-        time.sleep(3)
 
         
         
